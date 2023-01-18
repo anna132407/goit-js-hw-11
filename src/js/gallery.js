@@ -71,6 +71,8 @@ async function onSearchInFormSubmit(e) {
         Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
         refs.loadMoreButn.classList.add('is-hidden');
         }
+
+        
       } catch (error) {
         console.log(error);
     }
@@ -88,5 +90,12 @@ async function onClickLoadMoreButn() {
 
     if (hits === response.totalHits) {
     refs.loadMoreButn.classList.add('is-hidden');
+    }
+
+    if (Math.ceil(response.totalHits / per_page) === page) {
+        refs.loadMoreButn.classList.add('is-hidden');
+      Notiflix.Notify.info(
+        `We're sorry, but you've reached the end of search results.`
+      );
     }
 }
